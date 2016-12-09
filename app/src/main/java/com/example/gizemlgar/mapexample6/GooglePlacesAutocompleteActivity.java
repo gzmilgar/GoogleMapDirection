@@ -35,6 +35,7 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
     private Toolbar toolbar;
     private TextView title;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,9 +66,14 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
                 String placeDetailsStr = place.getName() + "\n"
                         + place.getId() + "\n"
                         + place.getLatLng().toString() + "\n"
-                        + place.getAddress() + "\n"
-                        + place.getAttributions();
+                        + place.getAddress();
                 txtPlaceDetails.setText(placeDetailsStr);
+                double a=place.getLatLng().latitude;
+                double b=place.getLatLng().longitude;
+                   LatLng loc = new LatLng(a, b);
+                map.addMarker(new MarkerOptions().position(loc).title(place.getName().toString()));
+                map.moveCamera(CameraUpdateFactory.newLatLng(loc));
+
             }
 
             @Override
