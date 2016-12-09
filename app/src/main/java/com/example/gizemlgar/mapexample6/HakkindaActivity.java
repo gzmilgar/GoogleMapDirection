@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class Hakkinda extends AppCompatActivity {
+public class HakkindaActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private ImageButton imgBtnBack;
@@ -28,7 +28,7 @@ public class Hakkinda extends AppCompatActivity {
         imgBtnBack=(ImageButton) findViewById(R.id.backButton);
         imgBtnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intocan = new Intent(Hakkinda.this, GirisEkrani.class);
+                Intent intocan = new Intent(HakkindaActivity.this, GirisEkrani.class);
                 startActivity(intocan);
             }
         });

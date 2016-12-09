@@ -16,7 +16,7 @@ public class Song extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.song);
+        setContentView(R.layout.activity_song);
         imgBtnBack=(ImageButton) findViewById(R.id.backButton);
         imgBtnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

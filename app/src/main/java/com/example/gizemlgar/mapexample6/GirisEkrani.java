@@ -21,7 +21,7 @@ public class GirisEkrani extends AppCompatActivity implements PopupMenu.OnMenuIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_giris_ekrani);
+        setContentView(R.layout.activity_giris);
 
         title=(TextView) findViewById(R.id.title);
         title.setText("Proje 2 Giriş");
@@ -65,7 +65,7 @@ public class GirisEkrani extends AppCompatActivity implements PopupMenu.OnMenuIt
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_hakiinda:
-                Intent intocan = new Intent(GirisEkrani.this, Hakkinda.class);
+                Intent intocan = new Intent(GirisEkrani.this, HakkindaActivity.class);
                 startActivity(intocan);
                 return true;
         }

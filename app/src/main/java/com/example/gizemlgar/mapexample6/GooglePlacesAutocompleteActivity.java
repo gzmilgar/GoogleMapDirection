@@ -38,7 +38,7 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_map);
         title=(TextView) findViewById(R.id.title);
         title.setText("Konum Ayarları");
         imgBtnBack = (ImageButton) findViewById(R.id.backButton);

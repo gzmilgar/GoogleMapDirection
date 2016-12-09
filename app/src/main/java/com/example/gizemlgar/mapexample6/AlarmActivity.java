@@ -2,7 +2,6 @@ package com.example.gizemlgar.mapexample6;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +29,7 @@ public class AlarmActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_alarm);
 
         DatePicker =(DatePicker)findViewById(R.id.datePicker1);
         TimePicker = (TimePicker) findViewById(R.id.timePicker1);

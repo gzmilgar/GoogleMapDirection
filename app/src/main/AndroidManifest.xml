@@ -68,7 +68,7 @@
         <activity android:name=".GooglePlacesAutocompleteActivity" />
         <activity android:name=".Song" />
         <activity android:name=".AlarmActivity" />
-        <activity android:name=".Hakkinda"></activity>
+        <activity android:name=".HakkindaActivity"></activity>
     </application>
 
 </manifest>

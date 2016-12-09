@@ -4,7 +4,7 @@
     android:id="@+id/activity_hakkinda"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gizemlgar.mapexample6.Hakkinda"
+    tools:context="com.example.gizemlgar.mapexample6.HakkindaActivity"
     android:background="@android:color/holo_orange_light">
     <include layout="@layout/toolbar"></include>
     <TextView
