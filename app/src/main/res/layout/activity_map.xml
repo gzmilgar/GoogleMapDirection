@@ -3,20 +3,65 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark">
 
     <include layout="@layout/toolbar"></include>
-    <fragment
-        android:id="@+id/place_autocomplete_fragment"
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
-        />
-    <TextView
+        android:background="@color/cardview_light_background"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp">
+
+        <fragment
+            android:id="@+id/place_autocomplete_fragment"
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            android:layout_width="200dp"
+            android:layout_weight="1"
+            android:layout_height="25dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtPlaceDetails"
-        android:background="@color/colorPrimaryDark" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/cardview_light_background">
+
+        <fragment
+            android:id="@+id/place_autocomplete_fragment2"
+            android:layout_width="200dp"
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            android:layout_weight="1"
+            android:layout_height="25dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtPlaceDetails"
+            android:background="@color/colorPrimaryDark"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtPlaceDetails2"
+            android:background="@color/colorPrimaryDark"
+            android:layout_weight="1" />
+    </LinearLayout>
+
     <fragment
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"

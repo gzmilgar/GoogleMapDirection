@@ -57,6 +57,7 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
+        autocompleteFragment.setHint("Başlangıç Noktası");
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
@@ -71,6 +72,38 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
                 double a=place.getLatLng().latitude;
                 double b=place.getLatLng().longitude;
                    LatLng loc = new LatLng(a, b);
+                map.addMarker(new MarkerOptions().position(loc).title(place.getName().toString()));
+                map.moveCamera(CameraUpdateFactory.newLatLng(loc));
+
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i("", "An error occurred: " + status);
+            }
+        });
+
+
+        final TextView txtPlaceDetails2 = (TextView) findViewById(R.id.txtPlaceDetails2);
+        PlaceAutocompleteFragment autocompleteFragment2 = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment2);
+
+        autocompleteFragment2.setHint("Bitiş Noktası");
+        autocompleteFragment2.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i("", "Place: " + place.getName());
+
+                String placeDetailsStr = place.getName() + "\n"
+                        + place.getId() + "\n"
+                        + place.getLatLng().toString() + "\n"
+                        + place.getAddress();
+                txtPlaceDetails2.setText(placeDetailsStr);
+                double a=place.getLatLng().latitude;
+                double b=place.getLatLng().longitude;
+                LatLng loc = new LatLng(a, b);
                 map.addMarker(new MarkerOptions().position(loc).title(place.getName().toString()));
                 map.moveCamera(CameraUpdateFactory.newLatLng(loc));
 
