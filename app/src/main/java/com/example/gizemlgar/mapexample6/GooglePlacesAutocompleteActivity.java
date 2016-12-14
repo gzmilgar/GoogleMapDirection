@@ -1,6 +1,6 @@
 package com.example.gizemlgar.mapexample6;
 
-import android.*;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -68,8 +68,6 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
 
     ArrayList<LatLng> MarkerPoints;
     GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
-    Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
 
 
@@ -81,7 +79,6 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
-        // Initializing
         MarkerPoints = new ArrayList<>();
 
         title=(TextView) findViewById(R.id.title);
@@ -97,7 +94,6 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        final TextView txtPlaceDetails = (TextView) findViewById(R.id.txtPlaceDetails);
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
@@ -108,16 +104,12 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
                 // TODO: Get info about the selected place.
                 Log.i("", "Place: " + place.getName());
 
-                String placeDetailsStr = place.getName() + "\n"
-                        + place.getId() + "\n"
-                        + place.getLatLng().toString() + "\n"
-                        + place.getAddress();
-                txtPlaceDetails.setText(placeDetailsStr);
                 double a=place.getLatLng().latitude;
                 double b=place.getLatLng().longitude;
                    LatLng loc = new LatLng(a, b);
                 map.addMarker(new MarkerOptions().position(loc).title(place.getName().toString()));
                 map.moveCamera(CameraUpdateFactory.newLatLng(loc));
+                MapPoint(loc);
 
             }
 
@@ -129,7 +121,6 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
         });
 
 
-        final TextView txtPlaceDetails2 = (TextView) findViewById(R.id.txtPlaceDetails2);
         PlaceAutocompleteFragment autocompleteFragment2 = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment2);
 
@@ -139,17 +130,12 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
                 Log.i("", "Place: " + place.getName());
-
-                String placeDetailsStr = place.getName() + "\n"
-                        + place.getId() + "\n"
-                        + place.getLatLng().toString() + "\n"
-                        + place.getAddress();
-                txtPlaceDetails2.setText(placeDetailsStr);
                 double a=place.getLatLng().latitude;
                 double b=place.getLatLng().longitude;
                 LatLng loc = new LatLng(a, b);
                 map.addMarker(new MarkerOptions().position(loc).title(place.getName().toString()));
                 map.moveCamera(CameraUpdateFactory.newLatLng(loc));
+                MapPoint(loc);
 
             }
 
@@ -165,7 +151,6 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
-        //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
@@ -179,20 +164,43 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
             map.setMyLocationEnabled(true);
         }
 
+    }
 
-        LatLng origin=new LatLng(40.188909,29.969983);
-        LatLng dest=new LatLng(40.137710,29.979861);
+    public void MapPoint(LatLng point) {
+
+        if (MarkerPoints.size() > 1) {
+            MarkerPoints.clear();
+            map.clear();
+        }
+
+        MarkerPoints.add(point);
+
+        MarkerOptions options = new MarkerOptions();
+
+        options.position(point);
 
 
-        String url = getUrl(origin, dest);
-        Log.d("onMapClick", url.toString());
-        FetchUrl FetchUrl = new FetchUrl();
+        if (MarkerPoints.size() == 1) {
+            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        } else if (MarkerPoints.size() == 2) {
+            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        }
 
-        // Start downloading json data from Google Directions API
-        FetchUrl.execute(url);
-        //move map camera
-        map.moveCamera(CameraUpdateFactory.newLatLng(origin));
-        map.animateCamera(CameraUpdateFactory.zoomTo(11));
+
+        map.addMarker(options);
+
+        if (MarkerPoints.size() >= 2) {
+            LatLng origin = MarkerPoints.get(0);
+            LatLng dest = MarkerPoints.get(1);
+
+            String url = getUrl(origin, dest);
+            Log.d("onMapClick", url.toString());
+            FetchUrl FetchUrl = new FetchUrl();
+
+            FetchUrl.execute(url);
+            map.moveCamera(CameraUpdateFactory.newLatLng(origin));
+            map.animateCamera(CameraUpdateFactory.zoomTo(11));
+        }
 
     }
     @Override
@@ -213,22 +221,15 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            // Asking user if explanation is needed
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     android.Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-                //Prompt the user once explanation has been shown
-                ActivityCompat.requestPermissions(this,
+     ActivityCompat.requestPermissions(this,
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
 
 
             } else {
-                // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
@@ -242,23 +243,16 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
 
     private String getUrl(LatLng origin, LatLng dest) {
 
-        // Origin of route
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
 
-        // Destination of route
         String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
 
-
-        // Sensor enabled
         String sensor = "sensor=false";
 
-        // Building the parameters to the web service
         String parameters = str_origin + "&" + str_dest + "&" + sensor;
 
-        // Output format
         String output = "json";
 
-        // Building the url to the web service
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
 
 
@@ -275,13 +269,10 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
         try {
             URL url = new URL(strUrl);
 
-            // Creating an http connection to communicate with url
             urlConnection = (HttpURLConnection) url.openConnection();
 
-            // Connecting to url
             urlConnection.connect();
 
-            // Reading data from url
             iStream = urlConnection.getInputStream();
 
             BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
@@ -306,17 +297,14 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
         return data;
     }
 
-    // Fetches data from url passed
     private class FetchUrl extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... url) {
 
-            // For storing data from web service
             String data = "";
 
             try {
-                // Fetching the data from web service
                 data = downloadUrl(url[0]);
                 Log.d("Background Task data", data.toString());
             } catch (Exception e) {
@@ -331,7 +319,6 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
 
             ParserTask parserTask = new ParserTask();
 
-            // Invokes the thread for parsing the JSON data
             parserTask.execute(result);
 
         }
@@ -342,7 +329,6 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
      */
     private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
 
-        // Parsing the data in non-ui thread
         @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
 
@@ -355,7 +341,6 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
                 DataParser parser = new DataParser();
                 Log.d("ParserTask", parser.toString());
 
-                // Starts parsing data
                 routes = parser.parse(jObject);
                 Log.d("ParserTask","Executing routes");
                 Log.d("ParserTask",routes.toString());
@@ -367,21 +352,17 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
             return routes;
         }
 
-        // Executes in UI thread, after the parsing process
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList<LatLng> points;
             PolylineOptions lineOptions = null;
 
-            // Traversing through all the routes
             for (int i = 0; i < result.size(); i++) {
                 points = new ArrayList<>();
                 lineOptions = new PolylineOptions();
 
-                // Fetching i-th route
                 List<HashMap<String, String>> path = result.get(i);
 
-                // Fetching all the points in i-th route
                 for (int j = 0; j < path.size(); j++) {
                     HashMap<String, String> point = path.get(j);
 
@@ -392,7 +373,6 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
                     points.add(position);
                 }
 
-                // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
                 lineOptions.width(10);
                 lineOptions.color(Color.RED);
@@ -401,7 +381,6 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
 
             }
 
-            // Drawing polyline in the Google Map for the i-th route
             if(lineOptions != null) {
                 map.addPolyline(lineOptions);
             }
@@ -416,12 +395,9 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // permission was granted. Do the
-                    // contacts-related task you need to do.
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
@@ -434,14 +410,11 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
 
                 } else {
 
-                    // Permission denied, Disable the functionality that depends on this permission.
                     Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
                 }
                 return;
             }
 
-            // other 'case' lines to check for other permissions this app might request.
-            // You can add here other case statements according to your requirement.
         }
     }
     protected synchronized void buildGoogleApiClient() {
@@ -477,30 +450,6 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
 
     @Override
     public void onLocationChanged(Location location) {
-
-
-        mLastLocation = location;
-        if (mCurrLocationMarker != null) {
-            mCurrLocationMarker.remove();
-        }
-
-        //Place current location marker
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Current Position");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-        mCurrLocationMarker = map.addMarker(markerOptions);
-
-        //move map camera
-        map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        map.animateCamera(CameraUpdateFactory.zoomTo(11));
-
-        //stop location updates
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }
-
 
     }
 }
