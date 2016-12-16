@@ -19,7 +19,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Vibrator vib=(Vibrator)context.getSystemService(context.VIBRATOR_SERVICE);    //for Vibration
         vib.vibrate(2000);
 
-        Intent i=new Intent(context,Song.class);  //Song class contain media Song
+        Intent i=new Intent(context,SongActivity.class);  //SongActivity class contain media SongActivity
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
     }

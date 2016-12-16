@@ -22,7 +22,7 @@ public class AlarmActivity extends AppCompatActivity {
     TimePicker TimePicker;
     android.widget.DatePicker DatePicker;
     Button Setalarm;
-    private ImageButton imgBtnBack;
+    private ImageButton imgBtnBack,settringButton;
 
     final static int RQS_1 = 1;
 
@@ -31,6 +31,8 @@ public class AlarmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
 
+        settringButton=(ImageButton) findViewById(R.id.settingButton);
+        settringButton.setVisibility(View.INVISIBLE);
         DatePicker =(DatePicker)findViewById(R.id.datePicker1);
         TimePicker = (TimePicker) findViewById(R.id.timePicker1);
         Calendar now = Calendar.getInstance();
@@ -67,7 +69,7 @@ public class AlarmActivity extends AppCompatActivity {
         imgBtnBack=(ImageButton) findViewById(R.id.backButton);
         imgBtnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intocan = new Intent(AlarmActivity.this, GirisEkrani.class);
+                Intent intocan = new Intent(AlarmActivity.this, SplashScreenActivity.class);
                 startActivity(intocan);
             }
         });

@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class Song extends Activity {
+public class SongActivity extends Activity {
     MediaPlayer m;
     private ImageButton imgBtnBack;
     @Override
@@ -20,14 +20,14 @@ public class Song extends Activity {
         imgBtnBack=(ImageButton) findViewById(R.id.backButton);
         imgBtnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intocan = new Intent(Song.this, GirisEkrani.class);
+                Intent intocan = new Intent(SongActivity.this, SplashScreenActivity.class);
                 startActivity(intocan);
             }
         });
         m=MediaPlayer.create(getApplicationContext(), R.raw.saka);
         m.start();
 
-        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(Song.this);
+        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(SongActivity.this);
         dlgAlert.setTitle("Kalan !");
         dlgAlert.setMessage("Zaman doldu!");
         dlgAlert.setPositiveButton("OK",new DialogInterface.OnClickListener() {

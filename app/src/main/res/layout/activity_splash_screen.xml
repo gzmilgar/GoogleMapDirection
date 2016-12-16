@@ -4,34 +4,50 @@
     android:id="@+id/activity_giris_ekrani"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gizemlgar.mapexample6.GirisEkrani"
+    tools:context="com.example.gizemlgar.mapexample6.SplashScreenActivity"
     android:background="@color/cardview_light_background"
     android:backgroundTint="@android:color/holo_orange_light">
 
     <include layout="@layout/toolbar"></include>
 
     <Button
-        android:text="  Alarm Ayarları"
+        android:text="   Alarm Ayarları"
         android:layout_height="50dip"
         android:id="@+id/btnAlarm"
         android:clickable="true"
-        android:layout_marginTop="200dp"
         android:drawableLeft="@drawable/ic_access_alarm_white_24dp"
         android:gravity="left|center"
-        android:layout_centerHorizontal="true"
         android:background="@color/colorPrimaryDark"
-        android:layout_width="175dp" />
+        android:layout_width="175dp"
+        android:layout_marginTop="160dp"
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="  Konum Ayarları"
+        android:text="  Navigasyon"
         android:layout_height="wrap_content"
         android:id="@+id/btnKonum"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_navigation_white_24dp"
+        android:gravity="left|center"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="175dp"
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/btnAlarm"
+        android:layout_alignLeft="@+id/btnAlarm"
+        android:layout_alignStart="@+id/btnAlarm" />
+
+    <Button
+        android:text="   Konum Ayarları"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnHome"
         android:clickable="true"
         android:drawableLeft="@drawable/ic_gps_fixed_white_24dp"
         android:gravity="left|center"
         android:background="@color/colorPrimaryDark"
         android:layout_width="175dp"
-        android:layout_below="@+id/btnAlarm"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp" />
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/btnKonum"
+        android:layout_alignLeft="@+id/btnKonum"
+        android:layout_alignStart="@+id/btnKonum" />
+
 </RelativeLayout>

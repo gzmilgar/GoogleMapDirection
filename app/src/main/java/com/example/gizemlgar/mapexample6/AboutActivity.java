@@ -8,15 +8,19 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class HakkindaActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private ImageButton imgBtnBack;
+    private ImageButton imgBtnBack,settringButton;
     private TextView title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hakkinda);
+        setContentView(R.layout.activity_about);
+
+
+        settringButton=(ImageButton) findViewById(R.id.settingButton);
+        settringButton.setVisibility(View.INVISIBLE);
 
         title=(TextView) findViewById(R.id.title);
         title.setText("Hakkında");
@@ -28,7 +32,7 @@ public class HakkindaActivity extends AppCompatActivity {
         imgBtnBack=(ImageButton) findViewById(R.id.backButton);
         imgBtnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intocan = new Intent(HakkindaActivity.this, GirisEkrani.class);
+                Intent intocan = new Intent(AboutActivity.this, SplashScreenActivity.class);
                 startActivity(intocan);
             }
         });

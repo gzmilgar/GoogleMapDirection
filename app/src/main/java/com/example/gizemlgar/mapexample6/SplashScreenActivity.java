@@ -11,31 +11,33 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-public class GirisEkrani extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+public class SplashScreenActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
     private Toolbar toolbar;
-    private Button btnAlarm,btnKonum;
+    private Button btnAlarm,btnKonum,btnHome;
     private ImageButton imgBtnBack,settringButton;
     private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_giris);
+        setContentView(R.layout.activity_splash_screen);
 
         title=(TextView) findViewById(R.id.title);
         title.setText("Proje 2 Giriş");
         imgBtnBack=(ImageButton) findViewById(R.id.backButton);
         btnAlarm=(Button) findViewById(R.id.btnAlarm);
         btnKonum=(Button) findViewById(R.id.btnKonum);
+        btnHome=(Button) findViewById(R.id.btnHome);
+
 
         imgBtnBack.setVisibility(View.INVISIBLE);//geri butonu nu gorunmez yaptık
 
         settringButton=(ImageButton) findViewById(R.id.settingButton);
         settringButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(GirisEkrani.this, v);
-                popupMenu.setOnMenuItemClickListener(GirisEkrani.this);
+                PopupMenu popupMenu = new PopupMenu(SplashScreenActivity.this, v);
+                popupMenu.setOnMenuItemClickListener(SplashScreenActivity.this);
                 popupMenu.inflate(R.menu.popup_menu);
                 popupMenu.show();
             }
@@ -43,14 +45,21 @@ public class GirisEkrani extends AppCompatActivity implements PopupMenu.OnMenuIt
 
         btnAlarm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intocan = new Intent(GirisEkrani.this, AlarmActivity.class);
+                Intent intocan = new Intent(SplashScreenActivity.this, AlarmActivity.class);
                 startActivity(intocan);
             }
         });
 
         btnKonum.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(GirisEkrani.this, GooglePlacesAutocompleteActivity.class);
+                Intent intent = new Intent(SplashScreenActivity.this, GooglePlacesAutocompleteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(SplashScreenActivity.this, LocationActivity.class);
                 startActivity(intent);
             }
         });
@@ -65,7 +74,7 @@ public class GirisEkrani extends AppCompatActivity implements PopupMenu.OnMenuIt
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_hakiinda:
-                Intent intocan = new Intent(GirisEkrani.this, HakkindaActivity.class);
+                Intent intocan = new Intent(SplashScreenActivity.this, AboutActivity.class);
                 startActivity(intocan);
                 return true;
         }

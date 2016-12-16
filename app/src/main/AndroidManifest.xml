@@ -5,11 +5,10 @@
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         LocationActivity permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- EXTERNAL_STORAGE permissions are optional for Android 6.0 onwards. -->
     <uses-permission
@@ -55,7 +54,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".GirisEkrani">
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -66,9 +65,12 @@
         <receiver android:name=".AlarmReceiver" />
 
         <activity android:name=".GooglePlacesAutocompleteActivity" />
-        <activity android:name=".Song" />
+        <activity android:name=".SongActivity" />
         <activity android:name=".AlarmActivity" />
-        <activity android:name=".HakkindaActivity"></activity>
+        <activity android:name=".AboutActivity" />
+        <activity
+            android:name=".LocationActivity"
+            android:label="@string/title_activity_location"></activity>
     </application>
 
 </manifest>

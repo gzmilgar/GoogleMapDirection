@@ -34,7 +34,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -62,7 +61,7 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
 
     private CompositeSubscription compositeSubscription = new CompositeSubscription();
     private GoogleMap map;
-    private ImageButton imgBtnBack;
+    private ImageButton imgBtnBack,settringButton;
     private Toolbar toolbar;
     private TextView title;
 
@@ -81,12 +80,16 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
         }
         MarkerPoints = new ArrayList<>();
 
+
+        settringButton=(ImageButton) findViewById(R.id.settingButton);
+        settringButton.setVisibility(View.INVISIBLE);
+
         title=(TextView) findViewById(R.id.title);
-        title.setText("Konum Ayarları");
+        title.setText("Navigasyon");
         imgBtnBack = (ImageButton) findViewById(R.id.backButton);
         imgBtnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intocan = new Intent(GooglePlacesAutocompleteActivity.this, GirisEkrani.class);
+                Intent intocan = new Intent(GooglePlacesAutocompleteActivity.this, SplashScreenActivity.class);
                 startActivity(intocan);
             }
         });
