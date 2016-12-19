@@ -8,15 +8,18 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class SongActivity extends Activity {
     MediaPlayer m;
     private ImageButton imgBtnBack;
+    private TextView TVdistance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song);
+        TVdistance=(TextView) findViewById(R.id.TVdistance);
         imgBtnBack=(ImageButton) findViewById(R.id.backButton);
         imgBtnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -29,7 +32,7 @@ public class SongActivity extends Activity {
 
         AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(SongActivity.this);
         dlgAlert.setTitle("Kalan !");
-        dlgAlert.setMessage("Zaman doldu!");
+        dlgAlert.setMessage("Zaman doldu!"+TVdistance.getText());
         dlgAlert.setPositiveButton("OK",new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 m.stop();

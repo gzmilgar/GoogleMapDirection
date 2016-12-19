@@ -45,6 +45,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +64,9 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
     private GoogleMap map;
     private ImageButton imgBtnBack,settringButton;
     private Toolbar toolbar;
-    private TextView title;
+    private TextView title,TVdistance;
+    private Double a,aa,b,bb;
+    private LatLng loc,loc2;
 
     ArrayList<LatLng> MarkerPoints;
     GoogleApiClient mGoogleApiClient;
@@ -74,6 +77,8 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        TVdistance=(TextView) findViewById(R.id.TVdistance);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -107,9 +112,9 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
                 // TODO: Get info about the selected place.
                 Log.i("", "Place: " + place.getName());
 
-                double a=place.getLatLng().latitude;
-                double b=place.getLatLng().longitude;
-                   LatLng loc = new LatLng(a, b);
+                 a=place.getLatLng().latitude;
+                 b=place.getLatLng().longitude;
+                    loc = new LatLng(a, b);
                 map.addMarker(new MarkerOptions().position(loc).title(place.getName().toString()));
                 map.moveCamera(CameraUpdateFactory.newLatLng(loc));
                 MapPoint(loc);
@@ -133,12 +138,12 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
                 Log.i("", "Place: " + place.getName());
-                double a=place.getLatLng().latitude;
-                double b=place.getLatLng().longitude;
-                LatLng loc = new LatLng(a, b);
-                map.addMarker(new MarkerOptions().position(loc).title(place.getName().toString()));
-                map.moveCamera(CameraUpdateFactory.newLatLng(loc));
-                MapPoint(loc);
+                 aa=place.getLatLng().latitude;
+                 bb=place.getLatLng().longitude;
+                loc2 = new LatLng(aa, bb);
+                map.addMarker(new MarkerOptions().position(loc2).title(place.getName().toString()));
+                map.moveCamera(CameraUpdateFactory.newLatLng(loc2));
+                MapPoint(loc2);
 
             }
 
@@ -217,6 +222,7 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     }
+
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public boolean checkLocationPermission(){
@@ -359,6 +365,9 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList<LatLng> points;
             PolylineOptions lineOptions = null;
+            MarkerOptions markerOptions = new MarkerOptions();
+            String distance = "";
+            String duration = "";
 
             for (int i = 0; i < result.size(); i++) {
                 points = new ArrayList<>();
@@ -368,6 +377,14 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
 
                 for (int j = 0; j < path.size(); j++) {
                     HashMap<String, String> point = path.get(j);
+
+                    if(j==0){    // Get distance from the list
+                        distance = (String)point.get("distance");
+                        continue;
+                    }else if(j==1){ // Get duration from the list
+                        duration = (String)point.get("duration");
+                        continue;
+                    }
 
                     double lat = Double.parseDouble(point.get("lat"));
                     double lng = Double.parseDouble(point.get("lng"));
@@ -383,6 +400,8 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
                 Log.d("onPostExecute","onPostExecute lineoptions decoded");
 
             }
+            TVdistance.setText("Distance:"+distance + ", Duration:"+duration);
+
 
             if(lineOptions != null) {
                 map.addPolyline(lineOptions);
