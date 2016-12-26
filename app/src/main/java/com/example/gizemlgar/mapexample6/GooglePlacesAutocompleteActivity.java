@@ -250,7 +250,7 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
     }
 
 
-    private String getUrl(LatLng origin, LatLng dest) {
+    public String getUrl(LatLng origin, LatLng dest) {
 
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
 
@@ -271,7 +271,7 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
     /**
      * A method to download json data from url
      */
-    private String downloadUrl(String strUrl) throws IOException {
+    public String downloadUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
         HttpURLConnection urlConnection = null;

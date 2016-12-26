@@ -51,5 +51,6 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.squareup.moshi:moshi:1.2.0'
     testCompile 'junit:junit:4.12'
+    compile'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
 }

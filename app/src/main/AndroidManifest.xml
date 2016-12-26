@@ -65,12 +65,13 @@
         <receiver android:name=".AlarmReceiver" />
 
         <activity android:name=".GooglePlacesAutocompleteActivity" />
-        <activity android:name=".SongActivity" />
         <activity android:name=".AlarmActivity" />
         <activity android:name=".AboutActivity" />
-        <activity
-            android:name=".LocationActivity"
-            android:label="@string/title_activity_location"></activity>
+        <activity android:name=".LocationActivity" />
+
+        <service android:name=".NotificationService" />
+
+        <activity android:name=".DatabaseActivity"></activity>
     </application>
 
 </manifest>

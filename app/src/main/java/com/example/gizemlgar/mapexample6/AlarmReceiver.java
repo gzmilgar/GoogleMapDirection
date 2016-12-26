@@ -16,11 +16,6 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         Toast.makeText(context, "Zaman doldu!!!!", Toast.LENGTH_LONG).show();
-        Vibrator vib=(Vibrator)context.getSystemService(context.VIBRATOR_SERVICE);    //for Vibration
-        vib.vibrate(2000);
 
-        Intent i=new Intent(context,SongActivity.class);  //SongActivity class contain media SongActivity
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(i);
     }
 }

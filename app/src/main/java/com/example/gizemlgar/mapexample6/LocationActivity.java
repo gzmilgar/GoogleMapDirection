@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Button;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
@@ -25,6 +26,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     private GoogleMap map;
     private ImageButton imgBtnBack,settringButton;
     private TextView title;
+    private Button btnKonumKaydet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,13 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         title.setText("Konum Ayarları");
         settringButton=(ImageButton) findViewById(R.id.settingButton);
         settringButton.setVisibility(View.INVISIBLE);
+        btnKonumKaydet=(Button) findViewById(R.id.btnKonumKaydet);
+        btnKonumKaydet.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intocan = new Intent(LocationActivity.this, DatabaseActivity.class);
+                startActivity(intocan);
+            }
+        });
 
         imgBtnBack=(ImageButton) findViewById(R.id.backButton);
         imgBtnBack = (ImageButton) findViewById(R.id.backButton);
@@ -50,7 +59,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment_location);
-
+        autocompleteFragment.setHint("Konum seçmek için tıklayınız");
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
