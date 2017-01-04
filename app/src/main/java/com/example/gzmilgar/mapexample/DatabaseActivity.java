@@ -1,4 +1,4 @@
-package com.example.gizemlgar.mapexample6;
+package com.example.gzmilgar.mapexample;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

@@ -4,7 +4,7 @@
     android:id="@+id/activity_giris_ekrani"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gizemlgar.mapexample6.SplashScreenActivity"
+    tools:context="com.example.gzmilgar.mapexample.SplashScreenActivity"
     android:background="@color/cardview_light_background"
     android:backgroundTint="@android:color/holo_orange_light">
 

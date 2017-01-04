@@ -1,4 +1,4 @@
-package com.example.gizemlgar.mapexample6;
+package com.example.gzmilgar.mapexample;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

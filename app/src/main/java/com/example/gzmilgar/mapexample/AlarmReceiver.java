@@ -1,9 +1,8 @@
-package com.example.gizemlgar.mapexample6;
+package com.example.gzmilgar.mapexample;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Vibrator;
 import android.widget.Toast;
 
 /**

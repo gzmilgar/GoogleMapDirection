@@ -1,4 +1,4 @@
-package com.example.gizemlgar.mapexample6;
+package com.example.gzmilgar.mapexample;
 
 
 import android.Manifest;
@@ -45,7 +45,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

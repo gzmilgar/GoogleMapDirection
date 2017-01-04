@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.gizemlgar.mapexample6">
+    package="com.example.gzmilgar.mapexample">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -54,7 +54,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name="com.example.gzmilgar.mapexample.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -62,16 +62,16 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".AlarmReceiver" />
+        <receiver android:name="com.example.gzmilgar.mapexample.AlarmReceiver" />
 
-        <activity android:name=".GooglePlacesAutocompleteActivity" />
-        <activity android:name=".AlarmActivity" />
-        <activity android:name=".AboutActivity" />
-        <activity android:name=".LocationActivity" />
+        <activity android:name="com.example.gzmilgar.mapexample.GooglePlacesAutocompleteActivity" />
+        <activity android:name="com.example.gzmilgar.mapexample.AlarmActivity" />
+        <activity android:name="com.example.gzmilgar.mapexample.AboutActivity" />
+        <activity android:name="com.example.gzmilgar.mapexample.LocationActivity" />
 
-        <service android:name=".NotificationService" />
+        <service android:name="com.example.gzmilgar.mapexample.NotificationService" />
 
-        <activity android:name=".DatabaseActivity"></activity>
+        <activity android:name="com.example.gzmilgar.mapexample.DatabaseActivity"></activity>
     </application>
 
 </manifest>

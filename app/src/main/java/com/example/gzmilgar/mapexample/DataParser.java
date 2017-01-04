@@ -1,4 +1,4 @@
-package com.example.gizemlgar.mapexample6;
+package com.example.gzmilgar.mapexample;
 
 import com.google.android.gms.maps.model.LatLng;
 import org.json.JSONArray;
