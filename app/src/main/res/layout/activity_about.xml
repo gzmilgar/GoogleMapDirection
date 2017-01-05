@@ -7,13 +7,26 @@
     tools:context="com.example.gzmilgar.mapexample.AboutActivity"
     android:background="@android:color/holo_orange_light">
     <include layout="@layout/toolbar"></include>
-    <TextView
-        android:text="Hakkında Ekranı Yapım Aşamasında"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+
+    <ImageButton
+        android:id="@+id/bm"
+        android:layout_above="@+id/textView"
         android:layout_centerHorizontal="true"
+        android:src="@drawable/blogo"
+        android:layout_marginBottom="47dp"
+        android:layout_height="100dp"
+        android:layout_width="77dp"
+        android:layout_marginTop="100dp" />
+
+    <TextView
+        android:text="Bilecik Şeyh Edebali Üniversitesi Bilgisayar Mühendisliği BM401 Proje II dersi kapsamında Salim CEYHAN danışmanlığında Gizem İLGAR tarafından geliştirilmiştir."
+        android:layout_height="wrap_content"
         android:id="@+id/textView"
         android:textStyle="normal|bold"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="192dp"
+        android:layout_width="wrap_content" />
 </RelativeLayout>

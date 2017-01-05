@@ -6,11 +6,13 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Button;
 
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AddPlaceRequest;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
@@ -26,7 +28,10 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     private GoogleMap map;
     private ImageButton imgBtnBack,settringButton;
     private TextView title;
-    private Button btnKonumKaydet;
+    private Button addTodoBtn;
+    private EditText descEditText;
+
+    private DBManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +42,6 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         title.setText("Konum Ayarları");
         settringButton=(ImageButton) findViewById(R.id.settingButton);
         settringButton.setVisibility(View.INVISIBLE);
-        btnKonumKaydet=(Button) findViewById(R.id.btnKonumKaydet);
-        btnKonumKaydet.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intocan = new Intent(LocationActivity.this, DatabaseActivity.class);
-                startActivity(intocan);
-            }
-        });
 
         imgBtnBack=(ImageButton) findViewById(R.id.backButton);
         imgBtnBack = (ImageButton) findViewById(R.id.backButton);
@@ -70,6 +68,9 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                 map.moveCamera(CameraUpdateFactory.newLatLng(loc));
                 map.animateCamera(CameraUpdateFactory.zoomTo(15));
                 Log.i("", "Place: " + place.getName());
+                final String name = loc.toString();
+                final String desc =  place.getName().toString();
+                dbManager.insert(name, desc);
 
             }
 
@@ -79,6 +80,28 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                 Log.i("", "An error occurred: " + status);
             }
         });
+
+
+
+
+        setTitle("Konum Ekleyiniz");
+        descEditText = (EditText) findViewById(R.id.description_edittext);
+        addTodoBtn = (Button) findViewById(R.id.add_record);
+        dbManager = new DBManager(this);
+        dbManager.open();
+        addTodoBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+              //  final String name = subjectEditText.getText().toString();
+               // final String desc = descEditText.getText().toString();
+               // dbManager.insert(name, desc);
+                Intent main = new Intent(LocationActivity.this, CountryListActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(main);
+            }
+        });
+
+
+
 
     }
 

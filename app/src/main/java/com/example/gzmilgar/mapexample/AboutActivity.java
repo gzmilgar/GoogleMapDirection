@@ -1,6 +1,7 @@
 package com.example.gzmilgar.mapexample;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +18,17 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
+        ImageButton bm = (ImageButton) findViewById(R.id.bm);
+
+        bm.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String url = "http://bm.bilecik.edu.tr/";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
 
 
         settringButton=(ImageButton) findViewById(R.id.settingButton);

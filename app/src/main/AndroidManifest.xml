@@ -54,7 +54,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="com.example.gzmilgar.mapexample.SplashScreenActivity">
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -62,16 +62,17 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.example.gzmilgar.mapexample.AlarmReceiver" />
+        <receiver android:name=".AlarmReceiver" />
 
-        <activity android:name="com.example.gzmilgar.mapexample.GooglePlacesAutocompleteActivity" />
-        <activity android:name="com.example.gzmilgar.mapexample.AlarmActivity" />
-        <activity android:name="com.example.gzmilgar.mapexample.AboutActivity" />
-        <activity android:name="com.example.gzmilgar.mapexample.LocationActivity" />
+        <activity android:name=".GooglePlacesAutocompleteActivity" />
+        <activity android:name=".AlarmActivity" />
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".LocationActivity" />
+        <activity android:name=".CountryListActivity" />
+        <activity android:name=".ModifyCountryActivity" />
 
-        <service android:name="com.example.gzmilgar.mapexample.NotificationService" />
+        <service android:name=".NotificationService" />
 
-        <activity android:name="com.example.gzmilgar.mapexample.DatabaseActivity"></activity>
     </application>
 
 </manifest>
