@@ -59,8 +59,7 @@ public class AlarmActivity extends AppCompatActivity {
                         TimePicker.getCurrentMinute(),
                         00);
                 setAlarm(cal);
-                Intent intent = new Intent(getApplicationContext(),NotificationService.class);
-                startService(intent);//Servisi başlatır
+
             }
         });
         toolbar = (Toolbar) findViewById(R.id.toolbar);

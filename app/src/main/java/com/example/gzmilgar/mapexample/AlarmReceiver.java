@@ -16,5 +16,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Toast.makeText(context, "Zaman doldu!!!!", Toast.LENGTH_LONG).show();
 
+        Intent i=new Intent(context,NotificationService.class);
+               i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+               context.startService(i);
+
     }
+
 }

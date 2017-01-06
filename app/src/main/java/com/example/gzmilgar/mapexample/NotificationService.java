@@ -24,9 +24,6 @@ public class NotificationService extends Service {
     Context context ;
     Notification notification;
     Timer timer;
-    String url = "http://www.mobilhanem.com/test/deneme.php";//post edeceğimiz deneme adresi
-    String cevap;
-    PostClass post = new PostClass(); //Post class ı çağırıyoruz.
     @Override
     public IBinder onBind(Intent intent) {
         // TODO Auto-generated method stub
@@ -38,19 +35,17 @@ public class NotificationService extends Service {
         Toast.makeText(this, "Servis Çalıştı.Bu Mesaj Servis Class'dan", Toast.LENGTH_LONG).show();
 
         timer = new Timer();
-        timer.schedule(new TimerTask() {  //her 60 sn de bir bildirimGonder(); metodu çağırılır.
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 bildirimGonder();
             }
 
-        }, 0, 60000);
+        }, 0, 86400);
 
     }
     public void bildirimGonder(){// Burda servis class dan post edip sunucudan aldığımız değeri bildirim gönderiyoruz.
 
-        List<NameValuePair> params = new ArrayList<NameValuePair>(); //Post edilecek değişkenleri ayarliyoruz.
-        cevap = post.httpPost(url,"POST",params,20000);//sunucudan gelen değeri cevap stringine atıyoruz
 
         int icon = R.drawable.ic_directions_run_white_24dp;//notificationda gösterilecek icon
         long when = System.currentTimeMillis();//notificationın ne zaman gösterileceği
@@ -58,13 +53,16 @@ public class NotificationService extends Service {
         Intent intent=new Intent(context,GooglePlacesAutocompleteActivity.class);
         PendingIntent  pending= PendingIntent.getActivity(context, 0, intent, 0);//Notificationa tıklanınca açılacak activityi belirliyoruz
         NotificationCompat.Builder b = new NotificationCompat.Builder(context);
+        Intent i=new Intent(this,NotificationService.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.stopService(i);
         b.setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.drawable.ic_directions_run_white_24dp)
                 .setTicker("Hearty365")
                 .setContentTitle("Proje II den bildirim var")
-                .setContentText(cevap)
+                .setContentText("kaç km & kaç dk yol kaldığını buraya yazacak :)")
                 .setDefaults(Notification.DEFAULT_LIGHTS| Notification.DEFAULT_SOUND)
                 .setContentIntent(pending)
                 .setContentInfo("Info");
