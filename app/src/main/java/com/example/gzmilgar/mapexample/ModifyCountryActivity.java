@@ -1,9 +1,9 @@
 package com.example.gzmilgar.mapexample;
 
 /**
- * Created by anupamchugh on 19/10/15.
+ * Created by Gizem İlgar on 21.12.2016.
  */
-import android.app.Activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

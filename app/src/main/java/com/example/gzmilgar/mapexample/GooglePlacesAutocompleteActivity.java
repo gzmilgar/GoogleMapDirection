@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -63,9 +64,12 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
     private GoogleMap map;
     private ImageButton imgBtnBack,settringButton;
     private Toolbar toolbar;
-    private TextView title,TVdistance;
+    private TextView title,TVdistance,TVdistance2;
     private Double a,aa,b,bb;
     private LatLng loc,loc2;
+    float lat;
+    float lng;
+    public String konum;
 
     ArrayList<LatLng> MarkerPoints;
     GoogleApiClient mGoogleApiClient;
@@ -78,6 +82,7 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
         setContentView(R.layout.activity_map);
 
         TVdistance=(TextView) findViewById(R.id.TVdistance);
+        TVdistance2=(TextView) findViewById(R.id.TVdistance2);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -471,6 +476,12 @@ public class GooglePlacesAutocompleteActivity extends AppCompatActivity implemen
 
     @Override
     public void onLocationChanged(Location location) {
+
+        lat = (float) (location.getLatitude());
+        lng = (float) (location.getLongitude());
+        konum="Latitude: "+String.valueOf(lat)+" Longitude: "+String.valueOf(lng);
+        TVdistance2.setText("Latitude: "+String.valueOf(lat)+" Longitude: "+String.valueOf(lng));
+
 
     }
 }

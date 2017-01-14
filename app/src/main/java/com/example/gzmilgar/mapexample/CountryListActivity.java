@@ -39,7 +39,7 @@ public class CountryListActivity extends ActionBarActivity {
         settringButton.setVisibility(View.INVISIBLE);
 
         title=(TextView) findViewById(R.id.title);
-        title.setText("Hakkında");
+        title.setText("Konum Detay");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Toolbar");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));

@@ -1,7 +1,7 @@
 package com.example.gzmilgar.mapexample;
 
 /**
- * Created by anupamchugh on 19/10/15.
+ * Created by Gizem İlgar on 24.11.2016.
  */
 import android.content.ContentValues;
 import android.content.Context;

@@ -11,6 +11,9 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -24,6 +27,8 @@ public class NotificationService extends Service {
     Context context ;
     Notification notification;
     Timer timer;
+    GPSTracker gps;
+   public String knm;
     @Override
     public IBinder onBind(Intent intent) {
         // TODO Auto-generated method stub
@@ -34,6 +39,7 @@ public class NotificationService extends Service {
         context = getApplicationContext();
         Toast.makeText(this, "Servis Çalıştı.Bu Mesaj Servis Class'dan", Toast.LENGTH_LONG).show();
 
+        gpsLocation();
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -59,10 +65,10 @@ public class NotificationService extends Service {
         b.setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.ic_directions_run_white_24dp)
+                .setSmallIcon(icon)
                 .setTicker("Hearty365")
-                .setContentTitle("Proje II den bildirim var")
-                .setContentText("kaç km & kaç dk yol kaldığını buraya yazacak :)")
+                .setContentTitle("Alarm GPS varış süreniz")
+                .setContentText(""+knm)
                 .setDefaults(Notification.DEFAULT_LIGHTS| Notification.DEFAULT_SOUND)
                 .setContentIntent(pending)
                 .setContentInfo("Info");
@@ -73,6 +79,69 @@ public class NotificationService extends Service {
         nm.notify(1, b.build());
 
     }
+
+    public void gpsLocation()
+    {
+        gps = new GPSTracker(context);
+
+        if(gps.canGetLocation()) {
+
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+
+            knm="" + CalculationByDistance(latitude,longitude,40.6123375,42.976752799999986);
+            Toast.makeText(context, "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+        } else {
+            gps.showSettingsAlert();
+        }
+    }
+
+
+    public String CalculationByDistance(double lat1, double lon1,double lat2, double lon2) {
+        double Radius = 6371;
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(Math.toRadians(lat1))
+                * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2)
+                * Math.sin(dLon / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double temp = Radius * c;
+        temp=temp*0.621*2;
+        DecimalFormat df=new DecimalFormat("0.00");
+        String formate = df.format(temp);
+
+        double t=temp/100;
+        String str;
+        int i = (int) Double.parseDouble(String.valueOf(t));
+        int sa=  (int) Double.parseDouble(String.valueOf(t));
+        int dk=(int)temp%60;
+        int day=0;
+
+        if(i>59)
+        {
+            sa=i/60;
+        }
+
+         str=formate+" km "+sa+" sa " +dk+" dk";
+        if(sa<1)
+        {
+            str=formate+" km "+dk+" dk";
+        }
+
+        if(sa>23)
+        {
+            day=sa/24;
+            sa=sa%24;
+        }
+        if(day>0)
+        {
+            str=formate+" km "+day+" gün"+sa+" sa " +dk+" dk";
+        }
+        return str;
+    }
+
+
     @Override
     public void onDestroy() {//Servis stopService(); metoduyla durdurulduğunda çalışır
         timer.cancel();

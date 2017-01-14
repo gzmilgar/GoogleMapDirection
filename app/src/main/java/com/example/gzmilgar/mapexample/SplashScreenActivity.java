@@ -24,7 +24,7 @@ public class SplashScreenActivity extends AppCompatActivity implements PopupMenu
         setContentView(R.layout.activity_splash_screen);
 
         title=(TextView) findViewById(R.id.title);
-        title.setText("Proje 2 Giriş");
+        title.setText("Alarm GPS");
         imgBtnBack=(ImageButton) findViewById(R.id.backButton);
         btnAlarm=(Button) findViewById(R.id.btnAlarm);
         btnKonum=(Button) findViewById(R.id.btnKonum);
@@ -32,7 +32,6 @@ public class SplashScreenActivity extends AppCompatActivity implements PopupMenu
 
 
         imgBtnBack.setVisibility(View.INVISIBLE);//geri butonu nu gorunmez yaptık
-
         settringButton=(ImageButton) findViewById(R.id.settingButton);
         settringButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

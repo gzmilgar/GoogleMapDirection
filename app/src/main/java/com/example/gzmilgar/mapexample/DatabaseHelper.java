@@ -1,7 +1,7 @@
 package com.example.gzmilgar.mapexample;
 
 /**
- * Created by anupamchugh on 19/10/15.
+ * Created by Gizem İlgar on 24.11.2016.
  */
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DESC = "description";
 
     // Database Information
-    static final String DB_NAME = "MAP_DATABASE.DB";
+    static final String DB_NAME = "GPS_DATABASE.DB";
 
     // database version
     static final int DB_VERSION = 1;
